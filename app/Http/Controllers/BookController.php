@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function addBook(Request $request)
     {
@@ -30,8 +36,8 @@ class BookController extends Controller
         $data->published_date=$request->input('published_date');
         $data->price=$request->input('price');
         $data->pages=$request->input('num_pages');
-        $user_id = Auth::id();
-        $data->author_id=$user_id;
+//        $user_id = Auth::id();
+//        $data->author_id=$user_id;
         $data->save();
         return redirect('/books')->withSuccess('Your form has been submitted successfully!');
 
@@ -48,7 +54,7 @@ class BookController extends Controller
     {
         $data=Book::find($id);
         $data->delete();
-        return redirect('books');
+        return redirect('/books')->withDanger('Your book deleted successfully!');
     }
 
     public function update($id)
@@ -59,6 +65,15 @@ class BookController extends Controller
 
     public function edit(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'cover_image' => 'required|image',
+            'isbn' => 'required|unique:books,ISBN',
+            'published_date' => 'required|date',
+            'price' => 'required|numeric',
+            'number_of_pages' => 'integer',
+        ]);
 
         $data=Book::find($request->id);
         $data->title=$request->input('title');
@@ -72,5 +87,18 @@ class BookController extends Controller
         $data->save();
         return redirect('/books')->withSuccess('Your book update has been submitted successfully!');
     }
+
+//    public function login(Request $request)
+//    {
+//        $user=User::where('email',$request->input('email'))->get();
+//        if (Crypt::decrypt($user[0]->password)===$request->input('password'))
+//        {
+//            return redirect('/books');
+//        }
+//        else
+//        {
+//            return "login info not matched";
+//        }
+//    }
 
 }

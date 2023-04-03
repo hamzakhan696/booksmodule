@@ -1,7 +1,15 @@
 @extends('mytemplate')
 <div class="container">
     <h1>UPDATE THE BOOK HERE</h1>
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form action="/books/update" method="POST" class="col-md-6" enctype="multipart/form-data">
         @csrf

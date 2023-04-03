@@ -22,6 +22,7 @@
     </div>
     <div class="form-group">
         <label for="cover_image">Cover Image:</label>
+
         <input type="file" class="form-control-file" id="cover_image" name="cover_image">
     </div>
     <div class="form-group">
@@ -41,5 +42,7 @@
         <input type="number" class="form-control" id="num_pages" name="num_pages">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/books"  class="btn btn-secondary">List Page</a>
+
 </form>
 </div>

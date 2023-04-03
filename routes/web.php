@@ -14,10 +14,14 @@ use App\Http\Controllers\BookController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
-Route::post('/books/add',[BookController::class,'addBook'])->middleware('auth');
+
+    //Route::post('/login',[BookController::class,'login']);
+Route::post('/books/add',[BookController::class,'addBook']);
+
 Route::view('books/add','books.add');
+
 
 Route::get('/books',[BookController::class,'view']);
 Route::get('/delete/{id}',[BookController::class,'delete']);
@@ -25,6 +29,10 @@ Route::get('/delete/{id}',[BookController::class,'delete']);
 Route::get('books/update/{id}',[BookController::class,'update']);
 Route::post('books/update',[BookController::class,'edit']);
 
-//Route::post('/books', 'BookController@store')->name('books.store')->middleware('auth');
+//Route::post('/books', 'BookController@addBook')->name('books.add')->middleware('auth');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
