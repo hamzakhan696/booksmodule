@@ -46,7 +46,9 @@ class BookController extends Controller
 
     public function view()
     {
+
         $data=Book::all();
+
         return view('books.view',['data'=>$data]);
     }
 
@@ -68,7 +70,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'cover_image' => 'required|image',
+            'cover_image' => 'image',
             'isbn' => 'required|unique:books,ISBN',
             'published_date' => 'required|date',
             'price' => 'required|numeric',
@@ -78,8 +80,16 @@ class BookController extends Controller
         $data=Book::find($request->id);
         $data->title=$request->input('title');
         $data->description=$request->input('description');
-        $imageName = time() . '.' . $request->cover_image->extension();
-        $data->cover_image=$request->cover_image->storeAs('public/images', $imageName);
+        if ($request->hasFile('cover_image'))
+        {
+            $imageName = time() . '.' . $request->cover_image->extension();
+            $data->cover_image=$request->cover_image->storeAs('public/images', $imageName);
+        }
+        else
+        {
+            $data->cover_image=$request->input('current_image');
+        }
+
         $data->isbn=$request->input('isbn');
         $data->published_date=$request->input('published_date');
         $data->price=$request->input('price');

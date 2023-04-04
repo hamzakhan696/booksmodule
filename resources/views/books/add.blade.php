@@ -14,11 +14,11 @@
     @csrf
     <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" class="form-control" id="title" name="title">
+        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" id="description" name="description"></textarea>
+        <textarea class="form-control" id="description" name="description" value="">{{ old('description') }}</textarea>
     </div>
     <div class="form-group">
         <label for="cover_image">Cover Image:</label>
@@ -27,19 +27,19 @@
     </div>
     <div class="form-group">
         <label for="isbn">ISBN:</label>
-        <input type="text" class="form-control" id="isbn" name="isbn">
+        <input type="text" class="form-control" id="isbn" name="isbn" value="{{ old('isbn') }}">
     </div>
     <div class="form-group">
         <label for="published_date">Published Date:</label>
-        <input type="date" class="form-control" id="published_date" name="published_date">
+        <input type="date" class="form-control" id="published_date" name="published_date" value="{{ old('published_date') }}">
     </div>
     <div class="form-group">
         <label for="price">Price:</label>
-        <input type="text" class="form-control" id="price" name="price">
+        <input type="text" class="form-control" id="price" name="price" value="{{old('price')}}">
     </div>
     <div class="form-group">
         <label for="num_pages">Number of Pages:</label>
-        <input type="number" class="form-control" id="num_pages" name="num_pages">
+        <input type="number" class="form-control" id="num_pages" name="num_pages" value="{{old('price')}}">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     <a href="/books"  class="btn btn-secondary">List Page</a>

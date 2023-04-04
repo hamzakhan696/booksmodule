@@ -27,8 +27,12 @@
 
 
 
-            <th scope="col"><a class="btn btn-secondary" href="{{url('/books/add')}}">Add BOOKS</a></th>
-            <th>            <a href="/home" class="btn btn-info">Go Back</a>
+            <th scope="col"><a class="btn-sm btn btn-secondary" href="{{url('/books/add')}}">Add BOOKS</a></th>
+            <th>            <a href="/home" class="btn-sm btn btn-info">Go Back</a>
+            @auth
+
+                <td  class=" btn-sm btn btn-success">  <h6>Author:</h6> {{ Auth::user()->name }}</td>
+                @endauth
             </th>
         </tr>
         </thead>
@@ -43,9 +47,7 @@
                 <td>{{$dat['published_date']}}</td>
                 <td>{{$dat['price']}}</td>
                 <td>{{$dat['pages']}}</td>
-{{--                @auth--}}
-{{--                <td>{{ Auth::user()->name }}</td>--}}
-{{--                @endauth--}}
+
 
                                 <td><a class="btn btn-danger"onclick="return confirm('are u sure to delete this ')" href="{{url('delete',$dat->id)}}">Delete</a></td>
                 <td><a class="btn btn-primary" href="/books/update/{{$dat['id']}}">Update</a></td>

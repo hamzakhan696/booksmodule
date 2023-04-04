@@ -26,7 +26,10 @@
         </div>
         <div class="form-group">
             <label for="cover_image">Cover Image:</label>
-            <input type="file" class="form-control-file"  value="{{$data['cover_image']}}" id="cover_image" name="cover_image">
+
+            <input type="file" class="form-control-file" id="cover_image" name="cover_image">
+            <input type="text" name="current_image" value="{{$data->cover_image}}">
+
         </div>
         <div class="form-group">
             <label for="isbn">ISBN:</label>
